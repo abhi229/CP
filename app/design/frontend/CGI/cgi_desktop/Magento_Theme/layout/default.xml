@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        
+        <referenceContainer name="after.body.start">
+            <block class="Magento\Framework\View\Element\Template" name="custom.js" template="Magento_Theme::custom_js.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="report.bugs" remove="true"/>
+        <referenceBlock name="header.panel" remove="true"/> 
+        <referenceBlock name="header" remove="true"/>
+        <referenceBlock name="register-link" remove="true" /> 
+        <referenceBlock name="my-account-link" remove="true" />
+        <referenceBlock name="wish-list-link" remove="true" />
+        <referenceBlock name="catalog.compare.link" remove="true" />
+
+        <referenceContainer name="header-wrapper">
+            <container name="header-left-container-wrapper" as="header-left-container-wrapper" htmlTag="div" htmlClass="left-container-wrap"/>
+            <container name="header-right-container-wrapper" as="header-right-container-wrapper" htmlTag="div" htmlClass="right-container-wrap"/>
+        </referenceContainer>
+        <move element="logo" destination="header-left-container-wrapper"/>
+        <move element="top.search" destination="header-right-container-wrapper"/>
+        <move element="minicart" destination="header-right-container-wrapper" before="top.links" />
+        <move element="top.links" as="top.links" destination="header-right-container-wrapper" />
+
+        <referenceContainer name="footer">
+            <block class="Magento\Cms\Block\Block" name="footer_main">
+                <arguments>
+                    <argument name="block_id" xsi:type="string">footer_main</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="footer_links" remove="true"/>
+        <referenceBlock name="form.subscribe" remove="true" />
+    </body>
+</page>

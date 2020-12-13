@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Customer\Block\Account\AuthorizationLink $block */
+
+$dataPostParam = '';
+if ($block->isLoggedIn()) {
+    $dataPostParam = sprintf(" data-post='%s'", $block->getPostParams());
+}
+?>
+<li class="authorization-link" data-label="<?= $block->escapeHtmlAttr(__('or')) ?>">
+	<span class="user-login">User Login</span>
+	<ul class="login-dropdown" style="display: none;"> 
+		<?php if ($block->isLoggedIn()):?>
+		<li class="my-account"><a href="<?php echo $block->getBaseUrl()?>customer/account">My Account</a></li>
+		<?php endif;?>
+		<li class="login-logout">
+			<?php if($block->getLabel() == 'Sign In'):?>
+				<a href="javascript:void(0);"><?= $block->escapeHtml($block->getLabel()) ?></a></li>
+			<?php else:?>		
+				<a <?= /* @noEscape */ $block->getLinkAttributes() ?><?= /* @noEscape */ $dataPostParam ?>>
+        		<?= $block->escapeHtml($block->getLabel()) ?></a>
+        	<?php endif;?>
+        </li>
+    	
+	</ul>
+</li>

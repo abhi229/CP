@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Top menu for store
+ *
+ * @var $block \Magento\Theme\Block\Html\Topmenu
+ */
+
+$columnsLimit = $block->getColumnsLimit() ?: 0;
+$_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit);
+$currentUrl = $block->getCurrentUrl();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+?>
+
+<nav class="navigation" data-action="navigation">
+	<div class="nav-left">
+		<a href="javascript:void(0);" class="all-category-link">All Categories</a>
+		<ul class="all-category-dropdown" style="display: none;">
+			<li><a href="javascript:void(0);">Mobile</a></li>
+			<li><a href="javascript:void(0);">Electronics</a></li>
+			<li><a href="javascript:void(0);">Computers</a></li>
+			<li><a href="javascript:void(0);">Gaming</a></li>
+			<li><a href="javascript:void(0);">Kitchen</a></li>
+			<li><a href="javascript:void(0);">Health</a></li>
+			<li><a href="javascript:void(0);">Toy</a></li>
+		</ul>
+	</div>
+    <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
+
+    	<li class="level0 home <?php if($currentUrl == '/'): ?>active<?php endif; ?>"><a href="<?php echo $storeManager->getStore()->getBaseUrl(); ?>" title="<?php echo __('Home') ?>" class="level-top"><span><?php echo __('Home') ?></span></a></li>
+
+        <?= /* @noEscape */ $_menuHtml?>
+        <?= $block->getChildHtml() ?>
+    </ul>
+</nav>
+<div class="nav-right">
+<?php
+	echo $this->getLayout()
+	->createBlock('Magento\Cms\Block\Block')
+	->setBlockId('nav-right')
+	->toHtml();
+?>
+</div>
